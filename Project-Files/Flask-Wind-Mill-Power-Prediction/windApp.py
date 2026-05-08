@@ -1,12 +1,16 @@
-import numpy as np
+import os
+from pathlib import Path
+
 import joblib
+import numpy as np
 import requests
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 # Load the trained model
-model = joblib.load("power_prediction.sav")
+BASE_DIR = Path(__file__).resolve().parent
+model = joblib.load(BASE_DIR / "power_prediction.sav")
 
 # ---------- LANDING PAGE ----------
 @app.route('/')
@@ -25,7 +29,12 @@ def predict_page():
 def windapi():
     """Fetch real-time weather data from OpenWeatherMap API"""
     city = request.form.get('city')
-    api_key = "2d8ade70e9d0038838d19578f27e04db"
+    api_key = os.getenv("OPENWEATHER_API_KEY")
+    if not api_key:
+        return render_template(
+            "predict.html",
+            error="Weather API key is not configured. Set OPENWEATHER_API_KEY in environment."
+        )
 
     try:
         url = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+api_key
@@ -74,5 +83,5 @@ def result():
 if __name__ == "__main__":
     print("Starting Wind Energy Prediction Application...")
     print("Navigate to http://localhost:5000 in your browser")
-    app.run(debug=True)
+    app.run(debug=False)
 
