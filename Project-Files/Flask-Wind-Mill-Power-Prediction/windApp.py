@@ -1,8 +1,9 @@
-import numpy as np
-import joblib
-import requests
 import os
 from pathlib import Path
+
+import joblib
+import numpy as np
+import requests
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
