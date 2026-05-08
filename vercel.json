@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "installCommand": "python -m pip install --break-system-packages -r requirements.txt",
+  "installCommand": "python -m pip install --break-system-packages --upgrade pip setuptools wheel && python -m pip install --break-system-packages -r requirements.txt",
   "builds": [
     {
       "src": "Project-Files/Flask-Wind-Mill-Power-Prediction/windApp.py",
