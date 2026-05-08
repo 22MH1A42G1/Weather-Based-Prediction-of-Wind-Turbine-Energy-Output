@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "Project-Files/Flask-Wind-Mill-Power-Prediction/windApp.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "Project-Files/Flask-Wind-Mill-Power-Prediction/windApp.py"
+    }
+  ]
+}
