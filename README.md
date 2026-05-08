@@ -426,6 +426,16 @@ cd Weather-Based-Prediction-of-Wind-Turbine-Energy-Output/Project-Files/Flask-Wi
 pip install -r ../requirements.txt
 ```
 
+### Vercel Deployment Note
+
+This repository includes a root `vercel.json` with:
+
+```json
+"installCommand": "python -m pip install --break-system-packages -r requirements.txt"
+```
+
+This is required for Vercel's externally managed Python build environment (PEP 668), where plain `pip install -r requirements.txt` fails during build.
+
 Or install individually:
 
 ```bash
